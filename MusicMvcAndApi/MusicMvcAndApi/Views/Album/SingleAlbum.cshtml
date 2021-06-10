@@ -1,0 +1,51 @@
+﻿@model MusicMvcAndApi.Models.Album
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th class="w-50">Title</th>
+            <th>ID-number</th>
+            <th>Artist/Band</th>
+            <th>Release Date</th>
+            <th>Average User Rating</th>
+            <th>Price</th>
+            <th>Runtime</th>
+            <th>Track Count</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>@Html.DisplayFor(modelItem => Model.Title)</td>
+            <td>@Html.DisplayFor(modelItem => Model.Id)</td>
+            <td>@Html.DisplayFor(modelItem => Database.Artists.Where(x => x.Id == Model.ArtistId).FirstOrDefault().Name)</td>
+            <td>@Model.ReleaseDate.Date.ToString(System.Globalization.CultureInfo.CurrentCulture).Replace("00:00:00", "")</td>
+            <td>@Html.DisplayFor(modelItem => Model.AverageUserRating)</td>
+            <td>@Html.DisplayFor(modelItem => Model.Price):-</td>
+            <td>@Math.Floor((decimal)(Model.Runtime / 60))m@(Model.Runtime % 60)s</td>
+            <td>@Html.DisplayFor(modelItem => Model.NumberOfTracks)</td>
+        </tr>
+    </tbody>
+</table>
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Track Title</th>
+            <th>Track Id</th>
+            <th>Runtime</th>
+            <th>Featuring</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in MusicMvcAndApi.Models.Database.Tracks.Where(x => x.AlbumId == Model.Id))
+        {
+            <tr>
+                <td>@Html.DisplayFor(x => item.Title)</td>
+                <td>@Html.DisplayFor(x => item.Id)</td>
+                <td>@Math.Floor((decimal)(item.Runtime / 60))m@(item.Runtime % 60)s</td>
+                <td>@Html.DisplayFor(x => item.FeatArtist)</td>
+            </tr>
+        }
+    </tbody>
+</table>
+<br />
+<a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger">Delete Album</a>

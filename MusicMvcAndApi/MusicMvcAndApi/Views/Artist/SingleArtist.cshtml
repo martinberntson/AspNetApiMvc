@@ -1,0 +1,39 @@
+﻿@model MusicMvcAndApi.Models.Artist
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th class="w-50">Artist or Band Name</th>
+            <th>ID-number</th>
+            <th>Number of Albums</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>@Html.DisplayFor(modelItem => Model.Name)</td>
+            <td>@Html.DisplayFor(modelItem => Model.Id)</td>
+            <td>@Html.DisplayFor(modelItem => Model.AlbumCount)</td>
+        </tr>
+    </tbody>
+</table>
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Album Title</th>
+            <th>Album Id</th>
+            <th>Number of tracks</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in MusicMvcAndApi.Models.Database.Albums.Where(x => x.ArtistId == Model.Id))
+        {
+            <tr>
+                <td>@Html.DisplayFor(x => item.Title)</td>
+                <td>@Html.DisplayFor(x => item.Id)</td>
+                <td>@Html.DisplayFor(x => item.NumberOfTracks)</td>
+            </tr>
+        }
+    </tbody>
+</table>
+<br />
+<a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger">Delete Artist</a>

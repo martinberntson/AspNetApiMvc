@@ -1,0 +1,26 @@
+﻿@model MusicMvcAndApi.Models.Track
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th class="w-50">Title</th>
+            <th>ID-number</th>
+            <th>From Album</th>
+            <th>By Artist</th>
+            <th>Runtime</th>
+            <th>Featuring</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>@Html.DisplayFor(modelItem => Model.Title)</td>
+            <td>@Html.DisplayFor(modelItem => Model.Id)</td>
+            <td>@Html.DisplayFor(modelItem => Database.Albums.Where(x => x.Id == Model.AlbumId).FirstOrDefault().Title)</td>
+            <td>@Html.DisplayFor(modelItem => Database.Artists.Where(x => x.Id == Database.Albums.Where(y => y.Id == Model.AlbumId).FirstOrDefault().ArtistId).FirstOrDefault().Name)</td>
+            <td>@Math.Floor((decimal)(Model.Runtime / 60))m@(Model.Runtime % 60)s</td>
+            <td>@Html.DisplayFor(modelItem => Model.FeatArtist)</td>
+        </tr>
+    </tbody>
+</table>
+<br />
+<a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger">Delete Track</a>

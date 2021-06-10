@@ -1,0 +1,24 @@
+﻿
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Use the navbar to get to various views.</p><br /><br /><br />
+    <p class="text-left">
+        Quick how-to guide for using the API.<br />
+        All data is returned in JSON-form.<br />
+        The three TYPEs are Artist, Album and Track.<br />
+        "~/TYPE/api" will list all data of the specified TYPE.<br />
+        "~/TYPE/api/NUMBER" will, if possible, return the item of the TYPE with the corresponding ID NUMBER.<br />
+        "~/TYPE/api/create/PARAMETERS" requires parameters related to the TYPE to add a new item to the database.<br />
+        For Artist, the PARAMETERS are {string:name}<br />
+        For Album, the PARAMETERS are {string:title}&{int:artistId}&{date:releaseDate}&{float:averageUserRating}&{int:price}<br />
+        For Track, the PARAMETERS are {string:title}&{int:albumId}&{int:runtime}&{string:featuredArtist}<br />
+        "~/TYPE/api/update/PARAMETERS" works similar to create, but all PARAMETERS start with an additional {int:id}&<br />
+        For example: "~/Artist/api/Update/1&Queen" for changing artist with ID-number 1's name to Queen<br />
+        "~/TYPE/api/delete/NUMBER" will delete TYPE with ID NUMBER from the database.<br />
+        This gives full access to read, create, update and delete objects from the database through the API.
+    </p>
+</div>

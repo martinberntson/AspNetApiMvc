@@ -1,0 +1,7 @@
+﻿@model MusicMvcAndApi.Models.Track
+
+<form method="post">
+    @Html.HiddenFor(m => m.Id)
+    Confirm deletion of Track with ID @Model.Id
+    <input type="submit" class="btn btn-danger" />
+</form>
